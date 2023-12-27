@@ -1,6 +1,6 @@
 :: 用于提交当前变更(windows)
-:: author: houbb
-:: LastUpdateTime:  2018-11-22 09:08:52
+:: author: Brath
+:: LastUpdateTime:  2023-12-27 20:15:03
 :: 用法：双击运行，或者当前路径 cmd 直接输入 .\cgit.bat
 
 git pull
