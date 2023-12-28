@@ -5,7 +5,9 @@ import cn.brath.sensicheck.strategy.impl.SenFilterErrorImpl;
 import cn.brath.sensicheck.strategy.impl.SenFilterNonImpl;
 import cn.brath.sensicheck.strategy.impl.SenFilterReplaceImpl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 策略器上下文处理
@@ -15,16 +17,32 @@ import java.util.List;
  */
 public class SensiCheckContext {
 
-    private List<SensiCheckStrategy> strategyList;
+    private final Map<SensiCheckType, SensiCheckStrategy> strategyMap;
 
-    SensiCheckStrategy strategy;
+    private static SensiCheckContext instance = null;
 
     private SensiCheckContext() {
-        this.strategyList = List.of(
-                new SenFilterErrorImpl(),
-                new SenFilterNonImpl(),
-                new SenFilterReplaceImpl()
-        );
+        this.strategyMap = new HashMap<>();
+        this.strategyMap.put(SensiCheckType.REPLACE, new SenFilterReplaceImpl());
+        this.strategyMap.put(SensiCheckType.ERROR, new SenFilterErrorImpl());
+        this.strategyMap.put(SensiCheckType.NON, new SenFilterNonImpl());
+    }
+
+    public static synchronized SensiCheckContext getInstance() {
+        if (instance == null) {
+            instance = new SensiCheckContext();
+        }
+
+        return instance;
+    }
+
+    /**
+     * 获取业务实现
+     *
+     * @return
+     */
+    public SensiCheckStrategy getStrategyService() {
+        return strategyMap.get(SensiCheckType.ERROR);
     }
 
     /**
@@ -33,12 +51,8 @@ public class SensiCheckContext {
      * @param type
      * @return
      */
-    public static SensiCheckStrategy getStrategyService(SensiCheckType type) {
-        SensiCheckContext service = new SensiCheckContext();
-        return service.strategy = service.strategyList.stream()
-                .filter(item -> item.type().equals(type))
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException("敏感词过滤策略器上下文类处理失败，未找到匹配的过滤类型"));
+    public SensiCheckStrategy getStrategyService(SensiCheckType type) {
+        return strategyMap.get(type);
     }
 
 }

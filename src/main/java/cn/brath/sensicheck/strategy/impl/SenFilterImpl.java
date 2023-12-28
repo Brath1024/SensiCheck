@@ -1,12 +1,14 @@
 package cn.brath.sensicheck.strategy.impl;
 
-import cn.brath.sensicheck.SensiHolder;
+import cn.brath.sensicheck.strategy.SensiCheckContext;
+import cn.brath.sensicheck.strategy.SensiHolder;
 import cn.brath.sensicheck.strategy.SensiCheckStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Modifier;
 import java.util.Objects;
+import java.util.regex.Pattern;
 
 /**
  * @author Brath
@@ -45,6 +47,11 @@ public abstract class SenFilterImpl implements SensiCheckStrategy {
         }
         value = this.handleString((String) value);
         return value;
+    }
+
+    @Override
+    public boolean contains(String value) {
+        return sensiHolder.exists(value);
     }
 
     /**

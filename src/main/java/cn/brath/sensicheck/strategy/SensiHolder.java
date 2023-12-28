@@ -1,4 +1,4 @@
-package cn.brath.sensicheck;
+package cn.brath.sensicheck.strategy;
 
 import cn.brath.sensicheck.core.SenKey;
 import cn.brath.sensicheck.core.SenKeys;

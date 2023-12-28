@@ -20,4 +20,6 @@ public interface SensiCheckStrategy {
      */
     String defaultReplaceValue(String value, String replaceValue);
 
+    boolean contains(String value);
+
 }
