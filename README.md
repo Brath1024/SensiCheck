@@ -152,4 +152,5 @@ public void test1() {
 
 # 已在Nexus发布
 
-![image-20231228163256440](doc\images\image-20231228163256440.png)
+![image-20231228163256440](https://github.com/Brath1024/SensiCheck/blob/master/doc/images/image-20231228163256440.png?raw=true)
+
