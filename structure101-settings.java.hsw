@@ -12,7 +12,9 @@
   <property name="show-needs-to-compile" value="false" />
   <property name="project-type" value="classpath" />
   <property name="hide-externals" value="true" />
-  <classpath />
+  <classpath>
+    <classpathentry kind="lib" path="target/classes" module="sensi-check" displaymodule="sensi-check" />
+  </classpath>
   <pom-root-files />
   <modules>
     <module name="sensi-check" kind="ide-project" />
