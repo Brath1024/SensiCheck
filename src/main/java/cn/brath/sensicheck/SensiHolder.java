@@ -1,10 +1,9 @@
 package cn.brath.sensicheck;
 
-import cn.brath.sensicheck.core.Emit;
-import cn.brath.sensicheck.core.Emits;
-import cn.brath.sensicheck.core.Trie;
-import cn.brath.sensicheck.utils.AssertUtil;
-import java.util.Base64;
+import cn.brath.sensicheck.core.SenKey;
+import cn.brath.sensicheck.core.SenKeys;
+import cn.brath.sensicheck.core.SenTrie;
+import cn.brath.sensicheck.utils.StringUtil;
 import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,10 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -27,20 +23,18 @@ import java.util.stream.Collectors;
  * @since 2023-07-28 14:17:54
  * <p>
  * 使用AC自动机实现敏感词处理
- * 核心代码源自Github：Leego Yih，找不到源仓库地址了
  * </p>
  */
-public class SensiCheckHolder {
+public class SensiHolder {
 
-    private static final Logger logger = LoggerFactory.getLogger(SensiCheckHolder.class);
+    private static final Logger logger = LoggerFactory.getLogger(SensiHolder.class);
 
-    private Trie trie;
+    private SenTrie senTrie;
 
-    public SensiCheckHolder() {
+    public SensiHolder() {
         try {
             List<String> lines = readLines();
-            this.trie = new Trie(new HashSet<>(lines));
-            logger.info("敏感词实例初始化成功");
+            this.senTrie = new SenTrie(new HashSet<>(lines));
         } catch (IOException e) {
             logger.error("敏感词实例初始化失败 - {}", e.getMessage());
             e.printStackTrace();
@@ -49,8 +43,7 @@ public class SensiCheckHolder {
 
     private List<String> readLines() throws IOException {
         List<String> lines = new ArrayList<>();
-//        try (InputStream inputStream = getClass().getResourceAsStream("/sensitive/dict.txt");
-        try (InputStream inputStream = getClass().getResourceAsStream("/sensitive/senwrods.txt");
+        try (InputStream inputStream = getClass().getResourceAsStream("/senwrods.txt");
              BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -63,17 +56,17 @@ public class SensiCheckHolder {
     }
 
     public boolean exists(String input, boolean ifLog) {
-        Emits emits = this.trie.findAll(input);
-        if (!emits.isEmpty() && ifLog) {
-            logger.warn("存在敏感词：{}", String.join(",", emits.stream().map(Emit::getKeyword).collect(Collectors.toList())));
+        SenKeys senKeys = this.senTrie.findAll(input);
+        if (!senKeys.isEmpty() && ifLog) {
+            logger.warn("存在敏感词：{}", String.join(",", senKeys.stream().map(SenKey::getKeyword).collect(Collectors.toList())));
         }
-        return !emits.isEmpty();
+        return !senKeys.isEmpty();
     }
 
     public String existsStr(String input) {
-        Emits emits = this.trie.findAll(input);
-        if (!emits.isEmpty()) {
-            return emits.stream().map(Emit::getKeyword).collect(Collectors.joining(","));
+        SenKeys senKeys = this.senTrie.findAll(input);
+        if (!senKeys.isEmpty()) {
+            return senKeys.stream().map(SenKey::getKeyword).collect(Collectors.joining(","));
         }
         return null;
     }
@@ -88,14 +81,14 @@ public class SensiCheckHolder {
     }
 
     public String replace(String input, String replaceValue) {
-        Emits emits = this.trie.findAllIgnoreCase(input);
-        if (emits.isEmpty()) {
+        SenKeys senKeys = this.senTrie.findAllIgnoreCase(input);
+        if (senKeys.isEmpty()) {
             return input;
         }
-        if (AssertUtil.isEmpty(replaceValue)) {
+        if (StringUtil.isEmpty(replaceValue)) {
             replaceValue = "*";
         }
-        return emits.replaceWith(replaceValue);
+        return senKeys.replaceWith(replaceValue);
     }
 
     public String replaceCommon(String input) {

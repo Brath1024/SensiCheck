@@ -5,7 +5,7 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class SenException extends BaseRuntimeException {
+public class SenException extends RuntimeException {
     private static final long serialVersionUID = 1L;
 
     private String message;
@@ -18,12 +18,10 @@ public class SenException extends BaseRuntimeException {
     public SenException(String message, String value) {
         this.value = value;
         this.message = message;
-        super.setMessage(message);
     }
 
     public SenException(String message, int code) {
         this.message = message;
         this.code = code;
-        super.setMessage(message);
     }
 }

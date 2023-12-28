@@ -1,7 +1,6 @@
 package cn.brath.sensicheck.strategy;
 
 import cn.brath.sensicheck.constants.SensiCheckType;
-import cn.brath.sensicheck.exception.BusinessException;
 import cn.brath.sensicheck.strategy.impl.SenFilterErrorImpl;
 import cn.brath.sensicheck.strategy.impl.SenFilterNonImpl;
 import cn.brath.sensicheck.strategy.impl.SenFilterReplaceImpl;
@@ -39,7 +38,7 @@ public class SensiCheckContext {
         return service.strategy = service.strategyList.stream()
                 .filter(item -> item.type().equals(type))
                 .findFirst()
-                .orElseThrow(() -> new BusinessException("敏感词过滤策略器上下文类处理失败，未找到匹配的过滤类型"));
+                .orElseThrow(() -> new RuntimeException("敏感词过滤策略器上下文类处理失败，未找到匹配的过滤类型"));
     }
 
 }

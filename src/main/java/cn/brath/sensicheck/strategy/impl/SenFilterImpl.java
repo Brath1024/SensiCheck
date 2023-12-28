@@ -1,6 +1,6 @@
 package cn.brath.sensicheck.strategy.impl;
 
-import cn.brath.sensicheck.SensiCheckHolder;
+import cn.brath.sensicheck.SensiHolder;
 import cn.brath.sensicheck.strategy.SensiCheckStrategy;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,12 +15,12 @@ import java.util.Objects;
 public abstract class SenFilterImpl implements SensiCheckStrategy {
     private static final Logger logger = LoggerFactory.getLogger(SenFilterImpl.class);
 
-    protected SensiCheckHolder sensiCheckHolder;
+    protected SensiHolder sensiHolder;
 
     protected String replaceValue;
 
     public SenFilterImpl() {
-        this.sensiCheckHolder = new SensiCheckHolder();
+        this.sensiHolder = new SensiHolder();
     }
 
     /**

@@ -1,6 +1,6 @@
 package cn.brath.sensicheck.utils;
 
-public class AssertUtil {
+public class StringUtil {
 
     public static boolean isEmpty(String str) {
         if (null == str) {

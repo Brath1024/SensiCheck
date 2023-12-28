@@ -2,34 +2,30 @@ package cn.brath.sensicheck.core;
 
 import java.io.Serializable;
 
-public class Token implements Serializable {
+public class SenWord implements Serializable {
     private static final long serialVersionUID = -7918430275428907853L;
     private final String fragment;
-    private final Emit emit;
+    private final SenKey senKey;
 
-    public Token(String fragment, Emit emit) {
+    public SenWord(String fragment, SenKey senKey) {
         this.fragment = fragment;
-        this.emit = emit;
+        this.senKey = senKey;
     }
 
     public String getFragment() {
-        return this.fragment;
+        return fragment;
     }
 
-    public Emit getEmit() {
-        return emit;
-    }
-
-    public boolean isMatch() {
-        return emit != null;
+    public SenKey getSenKey() {
+        return senKey;
     }
 
     @Override
     public String toString() {
-        if (emit == null) {
+        if (senKey == null) {
             return fragment;
         } else {
-            return fragment + "(" + emit + ")";
+            return fragment + "(" + senKey + ")";
         }
     }
 }

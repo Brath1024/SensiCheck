@@ -3,7 +3,7 @@ package cn.brath.sensicheck.core;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class Emit implements Serializable {
+public class SenKey implements Serializable {
     private static final long serialVersionUID = -8879895979621579720L;
     /** The beginning index, inclusive. */
     private final int begin;
@@ -11,7 +11,7 @@ public class Emit implements Serializable {
     private final int end;
     private final String keyword;
 
-    public Emit(int begin, int end, String keyword) {
+    public SenKey(int begin, int end, String keyword) {
         this.begin = begin;
         this.end = end;
         this.keyword = keyword;
@@ -33,11 +33,11 @@ public class Emit implements Serializable {
         return keyword;
     }
 
-    public boolean overlaps(Emit o) {
+    public boolean overlaps(SenKey o) {
         return this.begin < o.end && this.end > o.begin;
     }
 
-    public boolean contains(Emit o) {
+    public boolean contains(SenKey o) {
         return this.begin <= o.begin && this.end >= o.end;
     }
 
@@ -45,9 +45,9 @@ public class Emit implements Serializable {
     public boolean equals(Object o) {
         if (this == o)
             return true;
-        if (!(o instanceof Emit))
+        if (!(o instanceof SenKey))
             return false;
-        Emit that = (Emit) o;
+        SenKey that = (SenKey) o;
         return this.begin == that.begin
                 && this.end == that.end
                 && Objects.equals(this.keyword, that.keyword);

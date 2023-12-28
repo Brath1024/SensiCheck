@@ -294,7 +294,7 @@ Assert.assertEquals("[WordTagsDto{word='五星红旗', tags=[政治, 国家]}, W
 ### 忽略大小写
 
 ```java
-final String text = "fuCK the bad words.";
+final String text = "fuCK the bad senWords.";
 
 String word = SensitiveWordHelper.findFirst(text);
 Assert.assertEquals("fuCK", word);
@@ -303,7 +303,7 @@ Assert.assertEquals("fuCK", word);
 ### 忽略半角圆角
 
 ```java
-final String text = "ｆｕｃｋ the bad words.";
+final String text = "ｆｕｃｋ the bad senWords.";
 
 String word = SensitiveWordHelper.findFirst(text);
 Assert.assertEquals("ｆｕｃｋ", word);
@@ -332,7 +332,7 @@ Assert.assertEquals("[五星紅旗]", wordList.toString());
 ### 忽略英文的书写格式
 
 ```java
-final String text = "Ⓕⓤc⒦ the bad words";
+final String text = "Ⓕⓤc⒦ the bad senWords";
 
 List<String> wordList = SensitiveWordHelper.findAll(text);
 Assert.assertEquals("[Ⓕⓤc⒦]", wordList.toString());
@@ -341,7 +341,7 @@ Assert.assertEquals("[Ⓕⓤc⒦]", wordList.toString());
 ### 忽略重复词
 
 ```java
-final String text = "ⒻⒻⒻfⓤuⓤ⒰cⓒ⒦ the bad words";
+final String text = "ⒻⒻⒻfⓤuⓤ⒰cⓒ⒦ the bad senWords";
 
 List<String> wordList = SensitiveWordBs.newInstance()
         .ignoreRepeat(true)

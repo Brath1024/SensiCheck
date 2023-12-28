@@ -24,7 +24,7 @@ public class SenFilterErrorImpl extends SenFilterImpl {
      */
     @Override
     protected String handleString(String value) {
-        String sens = super.sensiCheckHolder.existsStr(value);
+        String sens = super.sensiHolder.existsStr(value);
         if (sens != null) throw new SenException(errorText + " 可能涉及到的敏感词：[" + sens + "]", value);
         return value;
     }

@@ -3,23 +3,23 @@ package cn.brath.sensicheck.core;
 import java.io.Serializable;
 import java.util.*;
 
-public class AcNode implements Serializable {
+public class SenNode implements Serializable {
     private static final long serialVersionUID = -6350361756888572415L;
     private final int depth;
-    private Map<Character, AcNode> success;
-    private AcNode failure;
+    private Map<Character, SenNode> success;
+    private SenNode failure;
     private TreeSet<String> keywords;
 
-    public AcNode(int depth) {
+    public SenNode(int depth) {
         this.depth = depth;
     }
 
-    public AcNode nextState(char c) {
+    public SenNode nextState(char c) {
         return nextState(c, false);
     }
 
-    public AcNode nextState(char c, boolean ignoreCase) {
-        AcNode next = getState(c, ignoreCase);
+    public SenNode nextState(char c, boolean ignoreCase) {
+        SenNode next = getState(c, ignoreCase);
         if (next != null) {
             return next;
         } else if (depth == 0) {
@@ -28,15 +28,15 @@ public class AcNode implements Serializable {
         return null;
     }
 
-    public AcNode getState(char c) {
+    public SenNode getState(char c) {
         return success != null ? success.get(c) : null;
     }
 
-    public AcNode getState(char c, boolean ignoreCase) {
+    public SenNode getState(char c, boolean ignoreCase) {
         if (success == null) {
             return null;
         }
-        AcNode state = success.get(c);
+        SenNode state = success.get(c);
         if (state != null) {
             return state;
         }
@@ -56,21 +56,21 @@ public class AcNode implements Serializable {
         return null;
     }
 
-    public AcNode addNode(CharSequence cs) {
-        AcNode state = this;
+    public SenNode addNode(CharSequence cs) {
+        SenNode state = this;
         for (int i = 0; i < cs.length(); i++) {
             state = state.addNode(cs.charAt(i));
         }
         return state;
     }
 
-    public AcNode addNode(char c) {
+    public SenNode addNode(char c) {
         if (success == null) {
             success = new HashMap<>();
         }
-        AcNode state = success.get(c);
+        SenNode state = success.get(c);
         if (state == null) {
-            state = new AcNode(depth + 1);
+            state = new SenNode(depth + 1);
             success.put(c, state);
         }
         return state;
@@ -98,15 +98,15 @@ public class AcNode implements Serializable {
         return keywords != null && keywords.size() > 0 ? keywords.first() : null;
     }
 
-    public AcNode getFailure() {
+    public SenNode getFailure() {
         return failure;
     }
 
-    public void setFailure(AcNode failure) {
+    public void setFailure(SenNode failure) {
         this.failure = failure;
     }
 
-    public Map<Character, AcNode> getSuccess() {
+    public Map<Character, SenNode> getSuccess() {
         return success != null ? success : Collections.emptyMap();
     }
 

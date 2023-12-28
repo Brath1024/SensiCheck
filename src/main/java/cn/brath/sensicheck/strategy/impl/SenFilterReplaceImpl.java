@@ -21,6 +21,6 @@ public class SenFilterReplaceImpl extends SenFilterImpl {
      */
     @Override
     protected String handleString(String value) {
-        return super.sensiCheckHolder.replace(value, this.replaceValue);
+        return super.sensiHolder.replace(value, this.replaceValue);
     }
 }
