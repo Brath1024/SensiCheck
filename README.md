@@ -32,7 +32,7 @@
 
 ```xml
 <dependency>
-    <groupId>cn.brath</groupId>
+    <groupId>io.github.brath1024</groupId>
     <artifactId>sensi-check</artifactId>
     <version>0.0.1</version>
 </dependency>
@@ -141,3 +141,9 @@ public void test1() {
 | 序号 | 场景               | 耗时 |
 |:----|:-----------------|:----|
 | 1 | 敏感词，默认替换字符 | 1317ms，约 70W QPS |
+
+
+
+# 已在Nexus发布
+
+![image-20231228163256440](D:\dkstop\myProject\SensiCheck\sensi-check\doc\images\image-20231228163256440.png)

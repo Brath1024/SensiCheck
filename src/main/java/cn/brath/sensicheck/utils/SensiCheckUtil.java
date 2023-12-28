@@ -3,7 +3,6 @@ package cn.brath.sensicheck.utils;
 import cn.brath.sensicheck.constants.SensiCheckType;
 import cn.brath.sensicheck.strategy.SensiCheckContext;
 import cn.brath.sensicheck.strategy.SensiCheckStrategy;
-import org.springframework.beans.factory.annotation.Value;
 
 import java.util.List;
 import java.util.stream.Collectors;
