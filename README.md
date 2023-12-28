@@ -1,6 +1,6 @@
 # Sensi-Check
 
-[SensiCheck](https://github.com/houbb/sensi-check) 是一款基于【AC自动机】算法实现的高性能敏感词工具。[![](https://img.shields.io/badge/license-Apache2-FF0080.svg)](https://github.com/houbb/sensi-check/blob/master/LICENSE.txt)
+[SensiCheck](https://github.com/Brath1024/SensiCheck) 是一款基于【AC自动机】算法实现的高性能敏感词工具。[![](https://img.shields.io/badge/license-Apache2-FF0080.svg)](https://github.com/houbb/sensi-check/blob/master/LICENSE.txt)
 
 > [在线体验](https://www.brath.cn)
 
@@ -10,15 +10,15 @@
 
 ## 特性
 
-- [基于 AC自动机 算法，性能约为 70W+ QPS，应用无感](https://github.com/houbb/sensi-check#benchmark)
+- [基于 AC自动机 算法，性能约为 70W+ QPS，应用无感](https://github.com/Brath1024/SensiCheck#性能测试)
 
 
-- [支持自定义替换策略](https://github.com/houbb/sensi-check#%E8%87%AA%E5%AE%9A%E4%B9%89%E6%9B%BF%E6%8D%A2%E7%AD%96%E7%95%A5)
+- [支持自定义替换策略](https://github.com/Brath1024/SensiCheck#快速开始)
 
 
 ## 变更日志
 
-[CHANGE_LOG.md](https://github.com/houbb/sensi-check/blob/master/CHANGE_LOG.md)
+[点此查看](https://github.com/Brath1024/SensiCheck/blob/master/CHANGE_LOG.md)
 
 # 快速开始
 
