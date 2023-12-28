@@ -152,4 +152,4 @@ public void test1() {
 
 # 已在Nexus发布
 
-![image-20231228163256440](D:\dkstop\myProject\SensiCheck\sensi-check\doc\images\image-20231228163256440.png)
+![image-20231228163256440](doc\images\image-20231228163256440.png)
