@@ -38,6 +38,12 @@
 </dependency>
 ```
 
+## Maven Central Repository
+
+```
+https://central.sonatype.com/artifact/io.github.brath1024/sensi-check
+```
+
 ## 核心方法
 
 `SensiCheckUtil` 作为敏感词的工具类，核心方法如下：
