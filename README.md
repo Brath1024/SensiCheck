@@ -1,4 +1,4 @@
-# Sensi-Check
+# SensiCheck
 
 [SensiCheck](https://github.com/Brath1024/SensiCheck) 是一款基于【AC自动机】算法实现的高性能敏感词工具。[![](https://img.shields.io/badge/license-Apache2-FF0080.svg)](https://github.com/houbb/sensi-check/blob/master/LICENSE.txt)
 
@@ -10,10 +10,10 @@
 
 ## 特性
 
-- [基于 AC自动机 算法，性能约为 70W+ QPS，应用无感](https://github.com/Brath1024/SensiCheck#性能测试)
+- [基于 AC自动机 算法，性能约为 70W+ QPS](https://github.com/Brath1024/SensiCheck#性能测试)
 
 
-- [支持自定义替换策略](https://github.com/Brath1024/SensiCheck#快速开始)
+- [检测工具多种接入方式一键过滤](https://github.com/Brath1024/SensiCheck#核心方法)
 
 
 ## 变更日志
@@ -60,7 +60,7 @@ https://central.sonatype.com/artifact/io.github.brath1024/sensi-check
 | multiStringChecks | List<String> texts, String replaceValue, SensiCheckType type | List<String> | 多字符串检测，自定义替换值和过滤策略                 |
 | contains          | String value                                                 | boolean      | 字符串是否包含敏感词                                 |
 
-# 快速开始
+# 如何使用？
 
 #### 判断是否包含敏感词
 
