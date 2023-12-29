@@ -2,6 +2,8 @@ package cn.brath.sensicheck.strategy;
 
 import cn.brath.sensicheck.constants.SensiCheckType;
 
+import java.util.List;
+
 /**
  * @author Brath
  * @since 2023/7/28 15:42
@@ -21,5 +23,7 @@ public interface SensiCheckStrategy {
     String defaultReplaceValue(String value, String replaceValue);
 
     boolean contains(String value);
+
+    List<String> list();
 
 }

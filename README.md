@@ -14,6 +14,7 @@
 
 
 - [检测工具多种接入方式一键过滤](https://github.com/Brath1024/SensiCheck#核心方法)
+- [支持Spring配置Bean来启动Holder配置，自定义敏感词列表文件地址](https://github.com/Brath1024/SensiCheck#自定义配置)
 
 
 ## 变更日志
@@ -44,7 +45,9 @@
 https://central.sonatype.com/artifact/io.github.brath1024/sensi-check
 ```
 
-## 核心方法
+
+
+# 核心方法
 
 `SensiCheckUtil` 作为敏感词的工具类，核心方法如下：
 
@@ -59,6 +62,9 @@ https://central.sonatype.com/artifact/io.github.brath1024/sensi-check
 | multiStringChecks | List<String> texts, String replaceValue                      | List<String> | 多字符串检测，自定义替换值，默认过滤策略为REPLACE    |
 | multiStringChecks | List<String> texts, String replaceValue, SensiCheckType type | List<String> | 多字符串检测，自定义替换值和过滤策略                 |
 | contains          | String value                                                 | boolean      | 字符串是否包含敏感词                                 |
+| list              | ...                                                          | List<String> | 列出所有敏感词                                       |
+
+
 
 # 如何使用？
 
@@ -108,6 +114,37 @@ System.out.println(check);
 Output:
 SenException(message=文本内容检测到敏感词，已进行删除处理。为了维护社区网络环境，请不要出现带有敏感政治、暴力倾向、不健康色彩的内容! 可能涉及到的敏感词：[你妹]
 , value=你妹的, code=0)
+```
+
+#### 支持检测包含特殊字符的敏感词
+
+```java
+String text = "你#妹的，。";
+
+String check = SensiCheckUtil.check(text);
+
+System.out.println(check);
+```
+
+
+
+# 自定义配置
+
+###### 在Spring环境中使用时，可以使用Bean配置的方式来自定义SensiHolder，目前支持自定义敏感词文件地址，后续将支持更多灵活配置，敬请期待。
+
+##### 1.将自己的敏感词列表文件添加到资源目录中, 注意：敏感词列表需要以base64写入
+
+```shell
+add to resources/mySenwords.txt
+```
+
+##### 2.在您项目中的，交付给Spring托管的任意类中添加一个Bean定义
+
+```java
+@Bean
+public SensiHolder sensiHolder() {
+    return new SensiHolder("/mySenwords.txt");
+}
 ```
 
 

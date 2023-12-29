@@ -36,8 +36,7 @@ public class SensiCheckUtil {
      * 单字符串检测，自定义替换值和过滤策略
      */
     public static String check(String text, String replaceValue, SensiCheckType type) {
-        SensiCheckStrategy strategyService =
-                SensiCheckContext.getInstance().getStrategyService(type);
+        SensiCheckStrategy strategyService = SensiCheckContext.getInstance().getStrategyService(type);
 
         return strategyService.defaultReplaceValue(text, replaceValue);
     }
@@ -68,21 +67,27 @@ public class SensiCheckUtil {
      * 多字符串检测，自定义替换值和过滤策略
      */
     public static List<String> multiStringChecks(List<String> texts, String replaceValue, SensiCheckType type) {
-        SensiCheckStrategy strategyService =
-                SensiCheckContext.getInstance().getStrategyService(type);
+        SensiCheckStrategy strategyService = SensiCheckContext.getInstance().getStrategyService(type);
 
-        return texts.stream()
-                .map(t -> strategyService.defaultReplaceValue(t, replaceValue))
-                .collect(Collectors.toList());
+        return texts.stream().map(t -> strategyService.defaultReplaceValue(t, replaceValue)).collect(Collectors.toList());
     }
 
     /**
      * 字符串是否包含敏感词
      */
     public static boolean contains(String value) {
-        SensiCheckStrategy strategyService =
-                SensiCheckContext.getInstance().getStrategyService();
+        SensiCheckStrategy strategyService = SensiCheckContext.getInstance().getStrategyService();
 
         return strategyService.contains(value);
     }
+
+    /**
+     * 列出所有敏感词
+     */
+    public static List<String> list() {
+        SensiCheckStrategy strategyService = SensiCheckContext.getInstance().getStrategyService();
+
+        return strategyService.list();
+    }
+
 }

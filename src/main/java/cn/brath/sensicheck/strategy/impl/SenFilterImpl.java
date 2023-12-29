@@ -1,14 +1,14 @@
 package cn.brath.sensicheck.strategy.impl;
 
-import cn.brath.sensicheck.strategy.SensiCheckContext;
-import cn.brath.sensicheck.strategy.SensiHolder;
 import cn.brath.sensicheck.strategy.SensiCheckStrategy;
+import cn.brath.sensicheck.strategy.SensiHolder;
+import cn.hutool.extra.spring.SpringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Modifier;
+import java.util.List;
 import java.util.Objects;
-import java.util.regex.Pattern;
 
 /**
  * @author Brath
@@ -22,7 +22,12 @@ public abstract class SenFilterImpl implements SensiCheckStrategy {
     protected String replaceValue;
 
     public SenFilterImpl() {
-        this.sensiHolder = new SensiHolder();
+        try {
+            this.sensiHolder = SpringUtil.getBean(SensiHolder.class);
+            logger.info("Spring Beans are currently used for Holder instantiation.");
+        } catch (Exception e) {
+            this.sensiHolder = new SensiHolder();
+        }
     }
 
     /**
@@ -42,7 +47,7 @@ public abstract class SenFilterImpl implements SensiCheckStrategy {
                 Modifier.isInterface(valueClass.getModifiers()) ||
                         Modifier.isAbstract(valueClass.getModifiers())
         ) {
-            logger.warn("敏感词 参数已过滤: 参数：{},类型：Interface||Abstract", value);
+            logger.warn("Sensitive Words Parameters filtered: Parameters: {}, Type：Interface||Abstract.", value);
             return value;
         }
         value = this.handleString((String) value);
@@ -52,6 +57,11 @@ public abstract class SenFilterImpl implements SensiCheckStrategy {
     @Override
     public boolean contains(String value) {
         return sensiHolder.exists(value);
+    }
+
+    @Override
+    public List<String> list() {
+        return sensiHolder.list();
     }
 
     /**
